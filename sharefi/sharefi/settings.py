@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'sharefi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'sharefi',
+        'NAME': 'woodez-fi',
         'HOST': '192.168.2.148',
         'PORT': 27017 
     }
