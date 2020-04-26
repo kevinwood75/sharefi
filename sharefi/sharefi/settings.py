@@ -80,15 +80,30 @@ WSGI_APPLICATION = 'sharefi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
+        'ENFORCE_SCHEMA': False,
+        'LOGGING': {
+            'version': 1,
+            'loggers': {
+                'djongo': {
+                    'level': 'DEBUG',
+                    'propogate': False,                        
+                }
+            },
+        },
         'NAME': 'woodez-fi',
-        'HOST': '192.168.2.148',
-        'PORT': 27017 
-    }
+        'CLIENT': {
+            'host': '192.168.2.148',
+            'port': 27017,
+            'username': 'admin',
+            'password': 'jandrew28'
+            ''
+        }
+    } 
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
