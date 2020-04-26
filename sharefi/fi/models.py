@@ -1,3 +1,9 @@
 from django.db import models
 
-# Create your models here.
+
+class Stockinfo(models.Model):
+    ticker = models.CharField(max_length=70, blank=False, default='')
+    price = models.IntegerField()
+    volume = models.IntegerField()
+
+
