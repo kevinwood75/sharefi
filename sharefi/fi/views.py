@@ -68,4 +68,3 @@ def fi_list_stock_date(request):
     if request.method == 'GET':
         fi_serializer = FiSerializer(stock_records,many=True)
         return JsonResponse(fi_serializer.data, safe=False)
-
