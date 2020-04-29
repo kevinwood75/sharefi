@@ -62,7 +62,7 @@ def fi_detail(request,pk):
 @api_view(['GET'])
 def fi_list_stock_date(request):
     # GET all published stocks
-    stock_records = Stockinfo.objects.filter(stock_date=datetime.date.today())
+    stock_records = Stockinfo.objects.filter(stock_date__icontains=datetime.date.today)
 
     if request.method == 'GET':
         fi_serializer = FiSerializer(stock_records,many=True)
