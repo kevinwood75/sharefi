@@ -9,3 +9,5 @@ class Stockinfo(models.Model):
     stock_date = models.DateTimeField(default=now, blank=True)
 
 
+
+
