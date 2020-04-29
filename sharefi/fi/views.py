@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
+import datetime
  
 from fi.models import Stockinfo
 from fi.serializers import FiSerializer
@@ -61,7 +62,7 @@ def fi_detail(request,pk):
 @api_view(['GET'])
 def fi_list_stock_date(request):
     # GET all published stocks
-    stock_records = Stockinfo.objects.filter(stock_date=True)
+    stock_records = Stockinfo.objects.filter(stock_date=datetime.date.today())
 
     if request.method == 'GET':
         fi_serializer = FiSerializer(stock_records,many=True)
