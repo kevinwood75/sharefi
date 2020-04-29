@@ -64,7 +64,7 @@ def fi_list_stock_date(request):
     # GET all published stocks
     now = datetime.datetime.now()
     earlier = now - datetime.timedelta(days=2)
-    stock_records = Stockinfo.objects.filter(stock_date__range=(earlier,now))
+    stock_records = Stockinfo.objects.filter(stock_date__range=(earlier,now)).order_by('-stock_date')
     if request.method == 'GET':
         fi_serializer = FiSerializer(stock_records,many=True)
         return JsonResponse(fi_serializer.data, safe=False)
