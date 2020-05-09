@@ -15,7 +15,8 @@ def fi_list(request):
     # GET list of stocks, POST a new stock, delete all stocks
     if request.method == 'GET':
         stocks = Stockinfo.objects.all()
-
+        now = datetime.datetime.now()
+        earlier = now - datetime.timedelta(days=2)
         ticker = request.GET.get('ticker', None)
         if ticker is not None:
             stocks = stocks.filter(ticker__icontains=ticker,stock_date__range=(earlier,now) )
