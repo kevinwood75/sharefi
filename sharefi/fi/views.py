@@ -18,7 +18,7 @@ def fi_list(request):
 
         ticker = request.GET.get('ticker', None)
         if ticker is not None:
-            stocks = stocks.filter(ticker__icontains=ticker)
+            stocks = stocks.filter(ticker__icontains=ticker,stock_date__range=(earlier,now) )
         fi_serializer = FiSerializer(stocks, many=True)
         return JsonResponse(fi_serializer.data, safe=False)
 
