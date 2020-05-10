@@ -16,7 +16,7 @@ def fi_list(request):
     if request.method == 'GET':
         stocks = Stockinfo.objects.all()
         now = datetime.datetime.now()
-        earlier = now - datetime.timedelta(days=2)
+        earlier = now - datetime.timedelta(days=3)
         ticker = request.GET.get('ticker', None)
         if ticker is not None:
             stocks = stocks.filter(ticker__icontains=ticker).filter(stock_date__range=(earlier,now))
