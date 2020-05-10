@@ -5,4 +5,4 @@ https://bezkoder.com/django-mongodb-crud-rest-framework/
 
 https://docs.djangoproject.com/en/3.0/topics/db/models/
 
-https://docs.djangoproject.com/en/3.0/topics/db/queries/
+https://docs.djangoproject.com/en/2.0/topics/db/queries/
