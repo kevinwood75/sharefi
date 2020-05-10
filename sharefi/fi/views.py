@@ -71,7 +71,7 @@ def fi_list_stock_date(request):
         return JsonResponse(fi_serializer.data, safe=False)
 
 @api_view(['GET'])
-def  fi_get_avg_stock_price(request):
+def  fi_get_ai_stock_price(request):
      if request.method == 'GET':
         stocks = Stockinfo.objects.all()
         ticker = request.GET.get('ticker', None)
