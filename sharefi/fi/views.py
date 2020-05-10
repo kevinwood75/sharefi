@@ -69,3 +69,13 @@ def fi_list_stock_date(request):
     if request.method == 'GET':
         fi_serializer = FiSerializer(stock_records,many=True)
         return JsonResponse(fi_serializer.data, safe=False)
+
+@api_view(['GET'])
+def  fi_get_avg_stock_price(request):
+     if request.method == 'GET':
+        stocks = Stockinfo.objects.all()
+        ticker = request.GET.get('ticker', None)
+        if ticker is not None:
+            stocks = stocks.filter(ticker__icontains=ticker).latest('stock_date')
+        fi_serializer = FiSerializer(stocks, many=True)
+        return JsonResponse(fi_serializer.data, safe=False)
