@@ -77,6 +77,6 @@ def  fi_get_ai_stock_price(request):
         ticker = request.GET.get('ticker', None)
         if ticker is not None:
             stocks = stocks.filter(ticker__icontains=ticker).latest('stock_date')
-        print(stocks)
+        print(stocks.ticker)
         fi_serializer = FiSerializer(stocks, many=True)
         return JsonResponse(fi_serializer.data, safe=False)
