@@ -83,6 +83,6 @@ def  fi_get_ai_stock_price(request):
  #       print(stocks.tickerstock_date)
  #       fi_serializer = FiSerializer(stocks, many=True)
  #       print(fi_serializer.data)
-        ordered_d = collections.OrderedDict('ticker'= stocks.ticker, 'price'= stocks.price , 'stock_date'=stocks.stock_date)
+        ordered_d = collections.OrderedDict('ticker'= stocks.ticker, 'price'= stocks.price , 'volume'= stocks.volume, 'stock_date'=stocks.stock_date)
         return JsonResponse(ordered_d, safe=False)
         #return JsonResponse(fi_serializer.data, safe=False)
