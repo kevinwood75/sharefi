@@ -81,5 +81,5 @@ def  fi_get_ai_stock_price(request):
  #       result_dict = {'ticker': stocks.ticker, ''}
  #       print(stocks.tickerstock_date)
         fi_serializer = FiSerializer(stocks, many=True)
-        print(fi_serializer)
+        print(fi_serializer.data)
         return JsonResponse(fi_serializer.data, safe=False)
