@@ -9,7 +9,7 @@ from collections import OrderedDict
 from fi.models import Stockinfo
 from fi.serializers import FiSerializer
 from rest_framework.decorators import api_view
-
+from django.db.models import Avg, Max, Min
 
 @api_view(['GET', 'POST', 'DELETE'])
 def fi_list(request):
@@ -100,7 +100,19 @@ def  fi_get_av_stock_price(request):
 #         stocks = stocks.filter(ticker__icontains=ticker)
 ###        uniq_keys = stocks.order_by('ticker').distinct('ticker')
         fi_serializer = FiSerializer(stocks, many=True)
-        print(fi_serializer.data)
+        list = []
+        for order_dict in fi_serializer.data:
+            list.append(order_dict['ticker'])
+        total = {}
+        pricelist = []
+        volumelist = []
+        for ticker in set(list):
+            stocks = stocks.filter(ticker__icontains=ticker)
+            price_data = stocks.aggregate(Avg('price'), Max('price'), Min('price'))
+            price_data.update({'ticker': ticker})
+            pricelist.append(price_data)                                  
+
+        print(pricelist)
         
 #        list = []
 #           stocks = stocks.filter(ticker__icontains=ticker).latest('stock_date')
