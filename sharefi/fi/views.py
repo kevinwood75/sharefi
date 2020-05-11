@@ -91,4 +91,27 @@ def  fi_get_ai_stock_price(request):
  #       ordered_d = collections.OrderedDict('ticker'=stocks.ticker, 'price'= stocks.price, 'volume'= stocks.volume, 'stock_date'=stocks.stock_date)
         print(list)
         return JsonResponse(list, safe=False)
-        #return JsonResponse(fi_serializer.data, safe=False)
+
+
+@api_view(['GET'])
+def  fi_get_av_stock_price(request):
+     if request.method == 'GET':
+        stocks = Stockinfo.objects.all()
+#         stocks = stocks.filter(ticker__icontains=ticker)
+        uniq_keys = stocks.order_by('ticker').distinct('ticker')
+        print(uniq_keys)
+        
+#        list = []
+#           stocks = stocks.filter(ticker__icontains=ticker).latest('stock_date')
+#           result_dict = {'ticker': stocks.ticker, 'price': stocks.price, 'volume': stocks.volume, 'stock_date': stocks.stock_date}
+#           fi_keys = ["ticker", "price", "volume", "stock_date"]
+ #          list_of_tuples = [(key, result_dict[key]) for key in fi_keys]
+ #          result_dict = OrderedDict(list_of_tuples)
+ #          list.append(result_dict)
+ #       print(stocks.tickerstock_date)
+        fi_serializer = FiSerializer(stocks, many=True)
+ #       print(fi_serializer.data)
+ #       ordered_d = collections.OrderedDict('ticker'=stocks.ticker, 'price'= stocks.price, 'volume'= stocks.volume, 'stock_date'=stocks.stock_date)
+ #       print(list)
+        return JsonResponse(fi_serializer, safe=False)
+ ##       return JsonResponse(list, safe=False)
