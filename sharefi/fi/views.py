@@ -100,7 +100,7 @@ def  fi_get_av_stock_price(request):
 #         stocks = stocks.filter(ticker__icontains=ticker)
 ###        uniq_keys = stocks.order_by('ticker').distinct('ticker')
         fi_serializer = FiSerializer(stocks, many=True)
-        print(fi_serializer)
+        print(fi_serializer.data)
         
 #        list = []
 #           stocks = stocks.filter(ticker__icontains=ticker).latest('stock_date')
@@ -114,5 +114,5 @@ def  fi_get_av_stock_price(request):
  #       print(fi_serializer.data)
  #       ordered_d = collections.OrderedDict('ticker'=stocks.ticker, 'price'= stocks.price, 'volume'= stocks.volume, 'stock_date'=stocks.stock_date)
  #       print(list)
-        return JsonResponse(fi_serializer, safe=False)
+        return JsonResponse(fi_serializer.data, safe=False)
  ##       return JsonResponse(list, safe=False)
