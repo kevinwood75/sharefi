@@ -103,7 +103,7 @@ def  fi_get_av_stock_price(request):
         list = []
         for order_dict in fi_serializer.data:
             list.append(order_dict['ticker'])
-        total = {}
+        total = []
         pricelist = []
         volumelist = []
         for ticker in set(list):
@@ -113,8 +113,12 @@ def  fi_get_av_stock_price(request):
             price_data.update({'ticker': ticker})
             pricelist.append(price_data)                                  
 
-        print(pricelist)
-        
+        fi_keys = ["ticker", "price__avg", "price__max", "price__min"]
+        for i in pricelist:
+            list_of_tuples = [(key, i[key]) for key in fi_keys]
+            result_dict = OrderedDict(list_of_tuples)
+            total.append(result_dict)
+        print(total)
 #        list = []
 #           stocks = stocks.filter(ticker__icontains=ticker).latest('stock_date')
 #           result_dict = {'ticker': stocks.ticker, 'price': stocks.price, 'volume': stocks.volume, 'stock_date': stocks.stock_date}
@@ -127,5 +131,5 @@ def  fi_get_av_stock_price(request):
  #       print(fi_serializer.data)
  #       ordered_d = collections.OrderedDict('ticker'=stocks.ticker, 'price'= stocks.price, 'volume'= stocks.volume, 'stock_date'=stocks.stock_date)
  #       print(list)
-        return JsonResponse(fi_serializer.data, safe=False)
- ##       return JsonResponse(list, safe=False)
+##        return JsonResponse(fi_serializer.data, safe=False)
+        return JsonResponse(total, safe=False)
