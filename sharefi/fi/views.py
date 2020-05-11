@@ -110,7 +110,7 @@ def  fi_get_av_stock_price(request):
  #          result_dict = OrderedDict(list_of_tuples)
  #          list.append(result_dict)
  #       print(stocks.tickerstock_date)
-        fi_serializer = FiSerializer(stocks, many=True)
+ #       fi_serializer = FiSerializer(stocks, many=True)
  #       print(fi_serializer.data)
  #       ordered_d = collections.OrderedDict('ticker'=stocks.ticker, 'price'= stocks.price, 'volume'= stocks.volume, 'stock_date'=stocks.stock_date)
  #       print(list)
