@@ -4,7 +4,8 @@ from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
 import datetime
- 
+import collections
+
 from fi.models import Stockinfo
 from fi.serializers import FiSerializer
 from rest_framework.decorators import api_view
@@ -76,10 +77,12 @@ def  fi_get_ai_stock_price(request):
         stocks = Stockinfo.objects.all()
         ticker = request.GET.get('ticker', None)
         if ticker is not None:
-           stocks = stocks.filter(ticker__icontains=ticker)
- #          stocks = stocks.filter(ticker__icontains=ticker).latest('stock_date')
+ #          stocks = stocks.filter(ticker__icontains=ticker)
+           stocks = stocks.filter(ticker__icontains=ticker).latest('stock_date')
  #       result_dict = {'ticker': stocks.ticker, ''}
  #       print(stocks.tickerstock_date)
-        fi_serializer = FiSerializer(stocks, many=True)
-        print(fi_serializer.data)
-        return JsonResponse(fi_serializer.data, safe=False)
+ #       fi_serializer = FiSerializer(stocks, many=True)
+ #       print(fi_serializer.data)
+        ordered_d = collections.OrderedDict('ticker'= stocks.ticker, 'price'= stocks.price , 'stock_date'=stocks.stock_date)
+        return JsonResponse(ordered_d, safe=False)
+        #return JsonResponse(fi_serializer.data, safe=False)
