@@ -4,7 +4,7 @@ from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
 import datetime
-import collections
+from collections import OrderedDict
 
 from fi.models import Stockinfo
 from fi.serializers import FiSerializer
@@ -80,9 +80,13 @@ def  fi_get_ai_stock_price(request):
  #          stocks = stocks.filter(ticker__icontains=ticker)
            stocks = stocks.filter(ticker__icontains=ticker).latest('stock_date')
            result_dict = {'ticker': stocks.ticker, 'price': stocks.price, 'volume': stocks.volume, 'stock_date': stocks.stock_date}
+           fi_keys = ["ticker", "price", "volume", "stock_date"]
+           list_of_tuples = [(key, result_dict[key]) for key in fi_keys]
+           result_dict = OrderedDict(list_of_tuples)
  #       print(stocks.tickerstock_date)
  #       fi_serializer = FiSerializer(stocks, many=True)
  #       print(fi_serializer.data)
  #       ordered_d = collections.OrderedDict('ticker'=stocks.ticker, 'price'= stocks.price, 'volume'= stocks.volume, 'stock_date'=stocks.stock_date)
+        print(result_dict)
         return JsonResponse(result_dict, safe=False)
         #return JsonResponse(fi_serializer.data, safe=False)
