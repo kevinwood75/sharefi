@@ -98,8 +98,9 @@ def  fi_get_av_stock_price(request):
      if request.method == 'GET':
         stocks = Stockinfo.objects.all()
 #         stocks = stocks.filter(ticker__icontains=ticker)
-        uniq_keys = stocks.order_by('ticker').distinct('ticker')
-        print(uniq_keys)
+###        uniq_keys = stocks.order_by('ticker').distinct('ticker')
+        fi_serializer = FiSerializer(stocks, many=True)
+        print(fi_serializer)
         
 #        list = []
 #           stocks = stocks.filter(ticker__icontains=ticker).latest('stock_date')
