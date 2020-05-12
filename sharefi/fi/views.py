@@ -114,10 +114,10 @@ def  fi_get_av_stock_price(request):
             price_data = stocks.aggregate(Avg('price'), Max('price'), Min('price'))
             latest_price = stocks.filter(ticker__icontains=ticker).latest('price')
             price_data.update({'ticker': ticker})
-            price_data.update({'last_price': latest_price})
+            # price_data.update({'last_price': latest_price})
             pricelist.append(price_data)                                  
 
-        fi_keys = ["ticker", "price__avg", "price__max", "price__min", "last_price"]
+        fi_keys = ["ticker", "price__avg", "price__max", "price__min"]
         for i in pricelist:
             list_of_tuples = [(key, i[key]) for key in fi_keys]
             result_dict = OrderedDict(list_of_tuples)
