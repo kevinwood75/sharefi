@@ -102,13 +102,14 @@ def  fi_get_av_stock_price(request):
 #        fi_serializer = FiSerializer(stocks, many=True)
         list = []
 
-        for company in stocks.iterator():
+        for company in Stockinfo.object.all().iterator():
             list.append(company.ticker)
         print(set(list))
         total = []
         pricelist = []
         volumelist = []
         for ticker in set(list):
+            stocks = Stockinfo.objects.all()
             stocks = stocks.filter(ticker__icontains=ticker)
 #            latest_price = stocks.filter(ticker__icontains=ticker).latest('price')
             price_data = stocks.aggregate(Avg('price'), Max('price'), Min('price'))
