@@ -104,6 +104,7 @@ def  fi_get_av_stock_price(request):
 
         for company in stocks.iterator():
             list.append(company.ticker)
+        print(list)
         total = []
         pricelist = []
         volumelist = []
