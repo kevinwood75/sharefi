@@ -113,7 +113,7 @@ def  fi_get_av_stock_price(request):
             stocks = stocks.filter(ticker__icontains=ticker)
             price_data = stocks.aggregate(Avg('price'), Max('price'), Min('price'))
             latest_price = stocks.filter(ticker__icontains=ticker).latest('price')
-            print(latest_price)
+            print(latest_price.price)
             price_data.update({'ticker': ticker})
             # price_data.update({'last_price': latest_price})
             pricelist.append(price_data)                                  
