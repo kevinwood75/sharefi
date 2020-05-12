@@ -110,7 +110,7 @@ def  fi_get_av_stock_price(request):
         volumelist = []
         for ticker in set(list):
             stocks = stocks.filter(ticker__icontains=ticker)
-            latest_price = stocks.filter(ticker__icontains=ticker).latest('price')
+#            latest_price = stocks.filter(ticker__icontains=ticker).latest('price')
             price_data = stocks.aggregate(Avg('price'), Max('price'), Min('price'))
             price_data.update({'ticker': ticker})
             pricelist.append(price_data)                                  
