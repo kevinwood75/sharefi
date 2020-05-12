@@ -117,7 +117,7 @@ def  fi_get_av_stock_price(request):
             price_data.update({'last_price': latest_price})
             pricelist.append(price_data)                                  
 
-        fi_keys = ["ticker", "price__avg", "price__max", "price__min"]
+        fi_keys = ["ticker", "price__avg", "price__max", "price__min", "last_price"]
         for i in pricelist:
             list_of_tuples = [(key, i[key]) for key in fi_keys]
             result_dict = OrderedDict(list_of_tuples)
