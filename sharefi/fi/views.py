@@ -102,7 +102,7 @@ def  fi_get_av_stock_price(request):
 #        fi_serializer = FiSerializer(stocks, many=True)
         list = []
 
-        for company in Stockinfo.object.all().iterator():
+        for company in Stockinfo.objects.all().iterator():
             list.append(company.ticker)
         print(set(list))
         total = []
